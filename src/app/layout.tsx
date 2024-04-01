@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Kumbh_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/navbar/Navbar";
 
-const kumbh_sans = Kumbh_Sans({ subsets: ["latin"], variable: '--font-kumbh' });
+const kumbh_sans = Kumbh_Sans({ subsets: ["latin"], variable: "--font-kumbh" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={kumbh_sans.className}>{children}</body>
+      <body className={kumbh_sans.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
