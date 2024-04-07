@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NavLink from "./navLink/navLink";
+import { usePathname } from "next/navigation";
 
 const Links = () => {
   const links = [
@@ -30,9 +31,7 @@ const Links = () => {
   ];
 
   // Checks if the user is authenticated
-  const session = true;
-  // Checks if the user is admin
-  const isAdmin = true;
+  const session = false;
 
   return (
     <nav
@@ -46,28 +45,17 @@ const Links = () => {
           </li>
         ))}
       </ul>
-      <ul className="">
-        {session ? (
-          <>
-            {isAdmin ? (
-              <li className="relative h-12 lg:h-inherit">
-                {/* <NavLink item={{ title: "Admin", path: "/admin" }} /> */}
-                <Link href={"/admin"}>Admin</Link>
-              </li>
-            ) : (
-              <li className="relative h-12 lg:h-inherit">
-                <Link href={"/user"}>User</Link>
-              </li>
-            )}
-          </>
-        ) : (
+      {!session && (
+        <ul className="">
           <li>
-            <button className="h-10 w-full sm:hidden bg-orange px-4 rounded-lg lg:rounded-xl text-white flex items-center justify-center hover:bg-white shadow-[inset_0_0_0_0_rgba(255,125,26,0.6)] hover:shadow-[inset_0_-4rem_0_0_rgba(255,125,26,0.6)] transition-all duration-300">
-              Login
-            </button>
+            <Link href="/login">
+              <button className="h-10 w-full sm:hidden bg-orange px-4 rounded-lg lg:rounded-xl text-white flex items-center justify-center hover:bg-white shadow-[inset_0_0_0_0_rgba(255,125,26,0.6)] hover:shadow-[inset_0_-4rem_0_0_rgba(255,125,26,0.6)] transition-all duration-300">
+                Login
+              </button>
+            </Link>
           </li>
-        )}
-      </ul>
+        </ul>
+      )}
     </nav>
   );
 };
