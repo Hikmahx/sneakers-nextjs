@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Kumbh_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
+import Script from 'next/script';
 
 const kumbh_sans = Kumbh_Sans({ subsets: ["latin"], variable: "--font-kumbh" });
 
@@ -17,6 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          type="module"
+          src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+        ></Script>
+      </head>
+
       <body className={kumbh_sans.className}>
         <Navbar />
         {children}
