@@ -5,7 +5,7 @@ import { IonIcon } from "@ionic/react";
 import { close, menu, cartOutline, person } from "ionicons/icons";
 import NavLink from "./links/navLink/navLink";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "../cart/Cart";
 import { usePathname } from "next/navigation";
 
@@ -17,6 +17,11 @@ const Navbar = () => {
   };
 
   const pathName = usePathname();
+
+  useEffect(() => {
+    // Close the menu when the pathname changes
+    setIsMenuOpen(false);
+  }, [pathName]);
 
   // TO BE UPDATED WITH STATE LATER
   const total = 0;
@@ -50,11 +55,14 @@ const Navbar = () => {
           >
             <Image src="/logo.svg" alt="sneaker logo" width={138} height={20} />
           </Link>
-          <Links />
+          <Links isMenuOpen={isMenuOpen} />
           <div
             // ref={darkScreen}
-            className="screen -z-20 fixed inset-0 opacity-0 bg-black h-screen hidden lg:!hidden transition-all"
-            // onClick={displayMenu}
+            className={
+              "screen fixed inset-0 bg-black h-screen lg:!hidden transition-all" +
+              (isMenuOpen ? " opacity-60 !z-20" : " opacity-0 -z-20  hidden")
+            }
+            onClick={toggleMenu}
           ></div>
         </div>
         <Cart />
